@@ -45,16 +45,21 @@ function check {
 }
 
 function build_and_serve {
+  echo 'entro al build and server'
   bazel build //site:jekyll-tree.tar
+  echo 'genero el first build'
   rm -rf "$WORKING_DIR/*"
+  echo 'hizo el remove'
   tar -xf bazel-genfiles/site/jekyll-tree.tar -C "$WORKING_DIR"
-
+  echo 'genera el kill'
   pkill -9 jekyll || true
 
   if [ -z "$TARGET" ]; then
     echo "Serving skydoc.bazel.build site at port $PORT"
+    echo $WORKING_DIR
     jekyll serve --detach --quiet --port "$PORT" --source "$WORKING_DIR"
   else
+    echo 'entro al else'
     TMP_TARGET=$(mktemp -d)
     jekyll build --source "$WORKING_DIR" --destination "$TMP_TARGET"
     REPLACEMENT=$(echo "$SERVING_PREFIX" | sed s/\\//\\\\\\//g)

@@ -1,5 +1,6 @@
 ---
 layout: default
+stylesheet: docs
 title: Writing Documentation
 ---
 
