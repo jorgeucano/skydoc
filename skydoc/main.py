@@ -251,7 +251,11 @@ class HtmlWriter(object):
   def _write_ruleset(self, output_dir, ruleset, nav):
     # Load template and render markdown.
     template = self.__env.get_template('html.jinja')
-    out = template.render(title=ruleset.title, ruleset=ruleset, nav=nav)
+    link = {};
+    link.angular = '#';
+    link.nodejs = '#';
+    link.typescript = '#';
+    out = template.render(title=ruleset.title, link=link, ruleset=ruleset, nav=nav)
 
     # Write output to file. Output files are created in a directory structure
     # that matches that of the input file.
